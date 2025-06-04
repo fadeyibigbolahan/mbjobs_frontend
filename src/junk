@@ -1,0 +1,17 @@
+const handleBook = async (orgId, eventId) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const response = await axios.post(
+      `${url}events/${orgId}/${eventId}/book`,
+      {},
+      {
+        headers: { Authorization: token },
+      }
+    );
+    console.log("handle book", response.data);
+    alert("Booking successful!");
+  } catch (err) {
+    console.error("Booking failed:", err);
+    alert(err.response?.data?.message || "Failed to book event.");
+  }
+};
