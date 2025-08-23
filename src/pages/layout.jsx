@@ -43,11 +43,9 @@ const Layout = () => {
         )}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
-        <div className="h-[calc(100vh-110px)] overflow-y-auto overflow-x-hidden p-6 bg-white">
-          {/* <div className="overflow-y-auto overflow-x-hidden p-6 bg-white"> */}
+        <div className="overflow-y-auto overflow-x-hidden p-6 bg-white">
           <Outlet />
         </div>
-        {/* <Footer /> */}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import logoipsumm from "../assets/logoipsumm.png";
+import virtual from "../assets/virtual.png";
 import network from "../assets/network.jpg";
 import { KeySquare } from "lucide-react";
 import axios from "axios";
@@ -104,11 +104,7 @@ const VerificationPage = () => {
       <div className="h-full w-full bg-[#FFFFFF] md:w-[40%]">
         <div className="flex min-h-screen items-center justify-center">
           <div className="flex w-full flex-col items-center justify-center rounded-xl border bg-white p-8 gap-4">
-            <img
-              src={logoipsumm}
-              alt="logoipsumm Logo"
-              style={{ width: "100px" }}
-            />
+            <img src={virtual} alt="virtual Logo" style={{ width: "100px" }} />
             <h2 className="font-kanit mb-4 text-center text-sm font-semibold text-[#003366]">
               ENTER VERIFICATION CODE
             </h2>

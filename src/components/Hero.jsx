@@ -35,12 +35,10 @@ const Hero = () => {
 
             <div className="w-full flex md:justify-start justify-center items-center md:items-start gap-3">
               <Link to="/signup">
-                <Button>Get Started as an Apprentice</Button>
+                <Button>Explore Courses</Button>
               </Link>
               <Link to="/signup">
-                <Button className="bg-[#FFB23B]">
-                  Post a Job as an Employer
-                </Button>
+                <Button className="bg-[#FFB23B]">Join the Movement</Button>
               </Link>
             </div>
           </div>

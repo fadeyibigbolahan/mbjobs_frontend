@@ -10,6 +10,8 @@ import CoreFeatures from "../components/CoreFeatures";
 import HowItWorks from "../components/HowItWorks";
 import CallToAction from "../components/CallToAction";
 import CopyRight from "../components/CopyRight";
+import TrustedBy from "@/components/TrustedBy";
+import TopCategories from "@/components/TopCategories";
 
 function HomePage() {
   return (
@@ -18,13 +20,14 @@ function HomePage() {
         <Navbar />
       </div>
       <Hero />
+      <TrustedBy />
       <WhyChooseUs />
+      <TopCategories />
       <CoreFeatures />
-      <ForWho />
-      <HowItWorks />
+      {/* <ForWho /> */}
+      {/* <HowItWorks /> */}
       <CallToAction />
-      <CopyRight />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

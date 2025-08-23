@@ -8,6 +8,7 @@ import wallet from "../assets/wallet.jpg";
 import analysis from "../assets/analysis.jpg";
 import qrcode from "../assets/qrcode.jpg";
 import membershipPlan from "../assets/membership_plan.jpg";
+import employer from "../assets/employer.jpg";
 
 const WhyChooseUs = () => {
   const features = [
@@ -56,13 +57,11 @@ const WhyChooseUs = () => {
 
   return (
     <div className="flex flex-col py-8 justify-center items-center gap-3 px-16 overflow-hidden">
-      <div className="grid md:grid-cols-2 gap-10 justify-center">
-        {/* Left column */}
-        <div className="w-[80%]">
+      <div className="flex flex-row items-center justify-center gap-4">
+        <div className="w-[50%] rounded-lg overflow-hidden">
           <img
-            key={currentIndex}
-            src={images[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
+            src={employer}
+            alt=""
             className="w-full h-auto transition-opacity duration-1000 ease-in-out opacity-0 animate-fade-in"
           />
         </div>

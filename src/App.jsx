@@ -32,6 +32,23 @@ const CourseDetailsPage = lazy(() => import("./pages/CourseDetailsPage"));
 
 const JobDetailsPage = lazy(() => import("./pages/JobDetailsPage"));
 const MyCoursesPage = lazy(() => import("./pages/MyCoursesPage"));
+const EmployerProfilePage = lazy(() => import("./pages/EmployerProfilePage"));
+const ApprenticeDashboardPage = lazy(() =>
+  import("./pages/ApprenticeDashboardPage")
+);
+const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
+const ManageUsersPage = lazy(() => import("./pages/ManageUsersPage"));
+const ManageApplicationsPage = lazy(() =>
+  import("./pages/ManageApplicationsPage")
+);
+const CreateCoursePage = lazy(() => import("./pages/CreateCoursePage"));
+const AboutUsPage = lazy(() => import("./pages/AboutUsPage"));
+const PricingPage = lazy(() => import("./pages/PricingPage"));
+const ContactUsPage = lazy(() => import("./pages/ContactUsPage"));
+const FAQSupportPage = lazy(() => import("./pages/FAQSupportPage"));
+const LiveChatPage = lazy(() => import("./pages/LiveChatPage"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
 
 function App() {
   useAuthCheck(); // Automatically logout when token expires
@@ -43,6 +60,26 @@ function App() {
         element: <HomePage />,
       },
       {
+        path: "/about",
+        element: <AboutUsPage />,
+      },
+      {
+        path: "/pricing",
+        element: <PricingPage />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUsPage />,
+      },
+      {
+        path: "/faqs",
+        element: <FAQSupportPage />,
+      },
+      {
+        path: "/live-chat",
+        element: <LiveChatPage />,
+      },
+      {
         path: "/dashboard",
         element: (
           <PrivateRoute>
@@ -51,16 +88,24 @@ function App() {
         ),
         children: [
           { path: "overview", element: <DashboardPage /> },
+          { path: "apprentice-overview", element: <ApprenticeDashboardPage /> },
+          { path: "admin-overview", element: <AdminDashboardPage /> },
           { path: "job-application", element: <JobApplicationPage /> },
           { path: "post-job", element: <PostJobPage /> },
           { path: "my-jobs", element: <MyJobsPage /> },
           { path: "browse-jobs", element: <BrowseJobsPage /> },
           { path: "job-details", element: <JobDetailsPage /> },
+          { path: "manage-users", element: <ManageUsersPage /> },
+          { path: "manage-applications", element: <ManageApplicationsPage /> },
+          { path: "create-course", element: <CreateCoursePage /> },
           { path: "my-applications", element: <MyApplicationsPage /> },
           { path: "browse-courses", element: <BrowseCoursesPage /> },
-          { path: "course-details", element: <CourseDetailsPage /> },
+          { path: "course-details/:courseId", element: <CourseDetailsPage /> },
           { path: "my-courses", element: <MyCoursesPage /> },
+          { path: "user-profile", element: <UserProfilePage /> },
           { path: "profile-settings", element: <ProfileSettingsPage /> },
+          { path: "company-settings", element: <EmployerProfilePage /> },
+          { path: "category", element: <CategoryPage /> },
           { path: "help-support", element: <HelpSupportPage /> },
         ],
       },

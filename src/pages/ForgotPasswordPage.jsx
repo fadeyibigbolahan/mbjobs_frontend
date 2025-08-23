@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logoipsumm from "../assets/logoipsumm.png";
+import virtual from "../assets/virtual.png";
 import network from "../assets/network.jpg";
 import { Mail } from "lucide-react";
 import axios from "axios";
@@ -35,7 +35,7 @@ const ForgetPasswordPage = () => {
 
       // Optionally redirect user after a delay
       setTimeout(() => {
-        navigate("/reset-password");
+        navigate("/signin");
       }, 1500);
     } catch (err) {
       console.error("Forgot password error:", err);
@@ -48,15 +48,11 @@ const ForgetPasswordPage = () => {
   };
 
   return (
-    <div className="relative h-screen w-full flex flex-col gap-y-4 md:flex-row">
+    <div className="relative h-screen w-full flex flex-col gap-y-4 md:flex-row justify-center items-center">
       <div className="h-full w-full bg-[#FFFFFF] md:w-[40%]">
         <div className="flex min-h-screen items-center justify-center">
-          <div className="flex w-full flex-col items-center justify-center rounded-xl bg-white p-8 gap-4">
-            <img
-              src={logoipsumm}
-              alt="logoipsumm Logo"
-              style={{ width: "100px" }}
-            />
+          <div className="flex w-full flex-col items-center justify-center rounded-xl border bg-white p-8 gap-4">
+            <img src={virtual} alt="virtual Logo" style={{ width: "100px" }} />
             <h2 className="font-kanit mb-4 text-center text-sm font-semibold text-[#003366 ]">
               RESET YOUR PASSWORD
             </h2>
@@ -85,7 +81,7 @@ const ForgetPasswordPage = () => {
 
               <button
                 type="submit"
-                className="w-full rounded bg-[#003366 ] py-2 text-white hover:bg-[#7A54A1] flex justify-center items-center"
+                className="w-full rounded bg-[#003366] py-2 text-white hover:bg-[#7A54A1] flex justify-center items-center"
                 disabled={loading}
               >
                 {loading ? (
@@ -106,16 +102,6 @@ const ForgetPasswordPage = () => {
               </Link>
             </p>
           </div>
-        </div>
-      </div>
-
-      <div className="hidden h-full w-[60%] items-center justify-center bg-[#003366 ] md:flex">
-        <div className="w-[60%] shadow-md">
-          <img
-            src={network}
-            alt="Network"
-            style={{ width: "100%", height: "300px" }}
-          />
         </div>
       </div>
     </div>

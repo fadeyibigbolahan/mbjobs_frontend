@@ -15,6 +15,10 @@ import {
   ListChecks,
   FileCheck,
   Search,
+  Users,
+  FileStack,
+  School,
+  Tag,
 } from "lucide-react";
 
 export const navbarLinks = [
@@ -119,6 +123,11 @@ export const employerNavbarLinks = [
         icon: ListChecks,
         path: "/dashboard/my-jobs",
       },
+      {
+        label: "Company Settings",
+        icon: Building2,
+        path: "/dashboard/company-settings",
+      },
     ],
   },
 ];
@@ -130,7 +139,7 @@ export const apprenticeNavbarLinks = [
       {
         label: "Home",
         icon: Home,
-        path: "/dashboard/overview",
+        path: "/dashboard/apprentice-overview",
       },
       {
         label: "Browse Jobs",
@@ -151,6 +160,39 @@ export const apprenticeNavbarLinks = [
         label: "My Courses",
         icon: ListChecks,
         path: "/dashboard/my-courses",
+      },
+    ],
+  },
+];
+
+export const adminNavbarLinks = [
+  {
+    title: "Dashboard",
+    links: [
+      {
+        label: "Home",
+        icon: Home,
+        path: "/dashboard/admin-overview",
+      },
+      {
+        label: "Manage Users",
+        icon: Users,
+        path: "/dashboard/manage-users",
+      },
+      {
+        label: "Manage Applications",
+        icon: FileStack,
+        path: "/dashboard/manage-applications",
+      },
+      {
+        label: "Manage Course",
+        icon: School,
+        path: "/dashboard/create-course",
+      },
+      {
+        label: "Manage Categories",
+        icon: Tag,
+        path: "/dashboard/category",
       },
     ],
   },

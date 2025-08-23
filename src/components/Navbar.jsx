@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-import logoipsumm from "../assets/logoipsumm.png";
+import virtual from "../assets/virtual.png";
 import { Button } from "./ui/button";
 import { Mail, Smartphone, MoveRight } from "lucide-react";
 
@@ -16,20 +16,20 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center h-20 max-w-[1240px] mx-auto md:px-16 px-4 text-[#003366] font-[500] bg-white">
       <Link to="/">
-        <img src={logoipsumm} alt="fagis" style={{ width: "120px" }} />
+        <img src={virtual} alt="fagis" style={{ width: "50px" }} />
       </Link>
       <ul className="hidden md:flex">
-        <Link to="/features">
+        <Link to="/">
           <li className="p-4 py-2 cursor-pointer font-semibold hover:border-b-2 border-[#003366] text-sm">
             Features
           </li>
         </Link>
-        <ScrollLink to="about" smooth={true} duration={500}>
+        <Link to="/about">
           <li className="p-4 py-2 cursor-pointer font-semibold hover:border-b-2 border-[#003366] text-sm">
             Company
           </li>
-        </ScrollLink>
-        <Link to="/contact-vendor">
+        </Link>
+        <Link to="/pricing">
           <li className="p-4 py-2 cursor-pointer font-semibold hover:border-b-2 border-[#003366] text-sm">
             Pricing
           </li>
@@ -39,7 +39,7 @@ const Navbar = () => {
             FAQs
           </li>
         </Link>
-        <Link to="">
+        <Link to="/contact">
           <li className="p-4 py-2 cursor-pointer font-semibold hover:border-b-2 border-[#003366] text-sm">
             Contact Us
           </li>
@@ -68,12 +68,12 @@ const Navbar = () => {
         <div className="flex w-[70%] bg-white flex-col  p-4 h-full">
           <div className="flex flex-row justify-between items-center w-full mb-4">
             <Link to="/">
-              <img src={logoipsumm} alt="fagis" style={{ width: "120px" }} />
+              <img src={virtual} alt="fagis" style={{ width: "120px" }} />
             </Link>
             <AiOutlineClose size={20} onClick={handleNav} />
           </div>
           <ul>
-            <Link to="/features">
+            <Link to="/">
               <li className="py-2">Features</li>
             </Link>
             <Link to="">

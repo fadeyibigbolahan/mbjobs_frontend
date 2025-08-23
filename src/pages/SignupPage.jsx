@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import logoipsumm from "../assets/logoipsumm.png";
+import virtual from "../assets/virtual.png";
 import network from "../assets/network.jpg";
 import { url } from "../../api";
 
@@ -108,9 +108,9 @@ const SignupPage = () => {
             <div className="flex min-h-screen items-center justify-center">
               <div className="flex w-full flex-col items-center justify-center rounded-xl bg-white p-8 gap-4">
                 <img
-                  src={logoipsumm}
-                  alt="logoipsumm Logo"
-                  style={{ width: "100px" }}
+                  src={virtual}
+                  alt="virtual Logo"
+                  style={{ width: "50px" }}
                 />
                 <h2 className="font-kanit mb-4 text-center text-lg font-semibold">
                   CREATE AN ACCOUNT AS AN APPRENTICE
@@ -232,9 +232,9 @@ const SignupPage = () => {
             <div className="flex min-h-screen items-center justify-center">
               <div className="flex w-full flex-col items-center justify-center rounded-xl bg-white p-8 gap-4">
                 <img
-                  src={logoipsumm}
-                  alt="logoipsumm Logo"
-                  style={{ width: "100px" }}
+                  src={virtual}
+                  alt="virtual Logo"
+                  style={{ width: "50px" }}
                 />
                 <h2 className="font-kanit mb-4 text-center text-lg font-semibold">
                   CREATE AN ACCOUNT AS AN EMPLOYER

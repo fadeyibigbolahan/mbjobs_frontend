@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import logoipsumm from "../assets/logoipsumm.png";
+import virtual from "../assets/virtual.png";
 import network from "../assets/network.jpg";
 import Loading from "../components/Loading";
 
@@ -37,8 +37,13 @@ const SigninPage = () => {
       setResMessage("Login successful! Redirecting...");
       setShowSuccess(true);
       setTimeout(() => {
-        auth.user.verified
+        console.log("autttt", auth.user);
+        auth.user.verified && auth.user.role === "apprentice"
+          ? navigate("/dashboard/apprentice-overview")
+          : auth.user.verified && auth.user.role === "employer"
           ? navigate("/dashboard/overview")
+          : auth.user.verified && auth.user.role === "admin"
+          ? navigate("/dashboard/admin-overview")
           : navigate("/verification", {
               state: { email: auth.user.email },
             });
@@ -93,11 +98,7 @@ const SigninPage = () => {
         <div className="w-full bg-[#FFFFFF] md:w-[40%]">
           <div className="flex min-h-screen items-center justify-center">
             <div className="flex w-full flex-col items-center justify-center rounded-xl border bg-white p-8 gap-4">
-              <img
-                src={logoipsumm}
-                alt="logoipsumm Logo"
-                style={{ width: "100px" }}
-              />
+              <img src={virtual} alt="virtual Logo" style={{ width: "50px" }} />
               <h2 className="font-kanit mb-4 text-center text-sm font-semibold text-[#003366 ]">
                 LOGIN TO YOUR ACCOUNT
               </h2>
