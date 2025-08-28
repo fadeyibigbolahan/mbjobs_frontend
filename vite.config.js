@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
-  base: "/", // Ensure correct base path
+  base: "/mbjobs_frontend/", // Ensure correct base path
   plugins: [react()],
   resolve: {
     alias: {
