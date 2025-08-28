@@ -19,8 +19,6 @@ const DashboardPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -61,13 +59,27 @@ const DashboardPage = () => {
 
     const fetchMyJobs = async () => {
       try {
-        const response = await axios.get(`${url}jobs`, {
+        const response = await axios.get(`${url}jobs/employer/jobs`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: token, // Ensure Bearer format
           },
         });
+        console.log("Jobs Response from dashboard:", response.data);
         setTotalPostedJobs(response.data.jobs.length);
+        setActiveJobs(
+          response.data.jobs.filter((job) => job.status === "open").length
+        );
+        setExpiredJobs(
+          response.data.jobs.filter((job) => job.status === "closed").length
+        );
+        setApplicationReceived(
+          response.data.jobs.reduce(
+            (sum, job) =>
+              sum + (job.applicantCount || job.applicants?.length || 0),
+            0
+          )
+        );
       } catch (error) {
         if (error.response) {
           // Server responded with a status other than 2xx

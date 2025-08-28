@@ -105,9 +105,9 @@ const MyJobs = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      Open: "bg-green-100 text-green-800 border-green-200",
-      Expired: "bg-yellow-100 text-yellow-800 border-yellow-200",
-      Closed: "bg-red-100 text-red-800 border-red-200",
+      open: "bg-green-100 text-green-800 border-green-200",
+      expired: "bg-yellow-100 text-yellow-800 border-yellow-200",
+      closed: "bg-red-100 text-red-800 border-red-200",
     };
     return badges[status] || "bg-gray-100 text-gray-800 border-gray-200";
   };
@@ -149,12 +149,12 @@ const MyJobs = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6 text-xs">
+    <div className="max-w-7xl mx-auto md:p-6 text-xs">
       {/* Header */}
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="md:text-3xl text-xl font-bold text-gray-900">
               My Job Postings
             </h1>
             <p className="text-gray-600 mt-1">

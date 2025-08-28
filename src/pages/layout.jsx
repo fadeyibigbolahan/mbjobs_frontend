@@ -1,11 +1,8 @@
 import { Outlet } from "react-router-dom";
-
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { useClickOutside } from "../hooks/use-click-outside";
-
 import { Sidebar } from "../layouts/sidebar";
 import { Header } from "../layouts/header";
-
 import { cn } from "../utils/cn";
 import { useEffect, useRef, useState } from "react";
 import { Footer } from "@/layouts/footer";
@@ -36,15 +33,33 @@ const Layout = () => {
         )}
       />
       <Sidebar ref={sidebarRef} collapsed={collapsed} />
+
+      {/* Main content area with fixed header */}
       <div
         className={cn(
           "transition-[margin] duration-300",
           collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
         )}
       >
-        <Header collapsed={collapsed} setCollapsed={setCollapsed} />
-        <div className="overflow-y-auto overflow-x-hidden p-6 bg-white">
-          <Outlet />
+        {/* Fixed Header */}
+        <div
+          className="fixed top-0 left-0 right-0 z-40 transition-[left] duration-300"
+          style={{
+            left: collapsed ? "70px" : "240px",
+            width: collapsed ? "calc(100% - 70px)" : "calc(100% - 240px)",
+          }}
+        >
+          <Header collapsed={collapsed} setCollapsed={setCollapsed} />
+        </div>
+
+        {/* Content area with padding to account for fixed header */}
+        <div
+          className="pt-16" // Add top padding equal to header height
+          style={{ minHeight: "calc(100vh - 4rem)" }} // Ensure content area fills screen
+        >
+          <div className="overflow-y-auto overflow-x-hidden p-6 bg-white">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

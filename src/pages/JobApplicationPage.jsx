@@ -298,7 +298,7 @@ const JobApplicationsPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 text-xs">
+    <div className="max-w-7xl mx-auto md:p-6 text-xs">
       {/* Header */}
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

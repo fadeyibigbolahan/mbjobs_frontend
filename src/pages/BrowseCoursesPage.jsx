@@ -140,8 +140,8 @@ const BrowseCoursesPage = () => {
     <div className="min-h-screen text-xs">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-6 py-2">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <div className="max-w-7xl mx-auto md:px-6 py-2">
+          <h1 className="md:text-3xl text-xl font-bold text-gray-900 mb-2">
             Browse Courses
           </h1>
           <p className="text-sm text-gray-600">
@@ -150,7 +150,7 @@ const BrowseCoursesPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto p-2">
         {/* Filter Tabs */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-2">
@@ -158,7 +158,7 @@ const BrowseCoursesPage = () => {
               <button
                 key={category}
                 onClick={() => setFilter(category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all ${
+                className={`px-4 py-1 text-xs rounded-full font-medium transition-all ${
                   filter === category
                     ? "bg-blue-600 text-white shadow-md"
                     : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
@@ -181,8 +181,8 @@ const BrowseCoursesPage = () => {
         {/* Courses Grid */}
         {filteredCourses.length === 0 ? (
           <div className="text-center py-16">
-            <BookOpen className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-            <h3 className="text-xl font-medium text-gray-900 mb-2">
+            <BookOpen className="mx-auto h-10 w-10 text-gray-400 mb-4" />
+            <h3 className="text-xs font-medium text-gray-900 mb-2">
               No courses found
             </h3>
             <p className="text-gray-500">

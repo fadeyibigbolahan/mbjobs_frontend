@@ -49,6 +49,7 @@ const FAQSupportPage = lazy(() => import("./pages/FAQSupportPage"));
 const LiveChatPage = lazy(() => import("./pages/LiveChatPage"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccessPage"));
 
 function App() {
   useAuthCheck(); // Automatically logout when token expires
@@ -108,6 +109,10 @@ function App() {
           { path: "category", element: <CategoryPage /> },
           { path: "help-support", element: <HelpSupportPage /> },
         ],
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
       },
       { path: "/signin", element: <SigninPage /> },
       { path: "/signup", element: <SignupPage /> },

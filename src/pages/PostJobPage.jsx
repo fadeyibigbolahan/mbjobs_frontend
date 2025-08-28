@@ -55,7 +55,10 @@ const PostJobPage = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 space-y-4 text-xs">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white md:p-6 space-y-4 text-xs min-h-screen"
+    >
       <h2 className="text-xl font-semibold mb-2">Post a Job</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

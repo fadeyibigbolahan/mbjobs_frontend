@@ -83,7 +83,7 @@ const MyJobsTable = () => {
 
     const fetchMyJobs = async () => {
       try {
-        const response = await axios.get(`${url}jobs`, {
+        const response = await axios.get(`${url}jobs/employer/jobs`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: token, // Ensure Bearer format
@@ -112,9 +112,9 @@ const MyJobsTable = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      Active: "bg-green-100 text-green-800 border-green-200",
-      Expired: "bg-yellow-100 text-yellow-800 border-yellow-200",
-      Closed: "bg-red-100 text-red-800 border-red-200",
+      open: "bg-green-100 text-green-800 border-green-200",
+      expired: "bg-yellow-100 text-yellow-800 border-yellow-200",
+      closed: "bg-red-100 text-red-800 border-red-200",
     };
     return badges[status] || "bg-gray-100 text-gray-800 border-gray-200";
   };

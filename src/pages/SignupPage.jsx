@@ -107,11 +107,13 @@ const SignupPage = () => {
           <div className="h-full w-full bg-[#FFFFFF] md:w-[40%]">
             <div className="flex min-h-screen items-center justify-center">
               <div className="flex w-full flex-col items-center justify-center rounded-xl bg-white p-8 gap-4">
-                <img
-                  src={virtual}
-                  alt="virtual Logo"
-                  style={{ width: "50px" }}
-                />
+                <Link to="/">
+                  <img
+                    src={virtual}
+                    alt="virtual Logo"
+                    style={{ width: "50px" }}
+                  />
+                </Link>
                 <h2 className="font-kanit mb-4 text-center text-lg font-semibold">
                   CREATE AN ACCOUNT AS AN APPRENTICE
                 </h2>

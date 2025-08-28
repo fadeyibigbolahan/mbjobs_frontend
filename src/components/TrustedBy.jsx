@@ -22,7 +22,7 @@ const TrustedBy = () => {
             <span className="font-semibold">MB Jobs</span>
           </p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center justify-center">
+        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center justify-center">
           {partners.map((partner, index) => (
             <div key={index} className="flex justify-center">
               <img
@@ -32,7 +32,7 @@ const TrustedBy = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

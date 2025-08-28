@@ -256,7 +256,7 @@ const MyApplicationsPage = () => {
 
   if (error) {
     return (
-      <div className="p-6 flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center max-w-md">
           <svg
             className="w-12 h-12 text-red-400 mx-auto mb-4"
@@ -284,22 +284,22 @@ const MyApplicationsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-xs">
+    <div className="min-h-screen bg-white text-xs">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="border-b py-6">
+        <div className="max-w-7xl mx-auto md:px-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="md:text-3xl text-xl font-bold text-gray-900">
                 My Job Applications
               </h1>
               <p className="mt-2 text-gray-600">
                 Track and manage your job applications
               </p>
             </div>
-            <button
+            {/* <button
               onClick={fetchApplications}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+              className="bg-blue-600 text-white px-2 py-1 text-xs rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
             >
               <svg
                 className="w-4 h-4"
@@ -315,14 +315,14 @@ const MyApplicationsPage = () => {
                 />
               </svg>
               Refresh
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-7xl mx-auto">
         {/* Filters and Search */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm my-6 p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             {/* Search */}
             <div className="relative">

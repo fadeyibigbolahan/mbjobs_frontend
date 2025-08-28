@@ -48,11 +48,29 @@ const CourseDetailPage = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Start with sidebar closed on mobile
   const [progress, setProgress] = useState(0);
   const [moduleProgress, setModuleProgress] = useState({});
   const [notes, setNotes] = useState("");
   const [discussionOpen, setDiscussionOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("overview");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  // Handle window resize for responsiveness
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+
+      // Auto-close sidebar on mobile when switching to desktop
+      if (!mobile && sidebarOpen) {
+        setSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [sidebarOpen]);
 
   // Unified function to fetch course data from API
   const fetchCourseData = async () => {
@@ -69,7 +87,7 @@ const CourseDetailPage = () => {
       // Fetch course data
       const response = await axios.get(`${url}courses/${courseId}`, {
         headers: {
-          Authorization: token, // Added Bearer prefix (common practice)
+          Authorization: token,
         },
       });
 
@@ -113,8 +131,6 @@ const CourseDetailPage = () => {
         switch (status) {
           case 401:
             setError("Authentication failed. Please log in again.");
-            // Optionally redirect to login
-            // window.location.href = '/login';
             break;
           case 403:
             setError("You don't have permission to access this course.");
@@ -145,20 +161,9 @@ const CourseDetailPage = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      // Try to fetch existing progress (you might need a GET endpoint for this)
-      // For now, we'll simulate based on the course data
-      // If you have a GET endpoint like: GET /courses/:id/progress
-
       const moduleProgressData = {};
       let completedModulesFromAPI = [];
 
-      // You might want to add a GET endpoint to fetch progress
-      // const progressResponse = await axios.get(`${url}courses/${courseId}/progress`, {
-      //   headers: { Authorization: token }
-      // });
-      // completedModulesFromAPI = progressResponse.data.completedModules || [];
-
-      // For now, initialize based on course data
       if (courseData.modules && courseData.modules.length > 0) {
         // Find current module (either marked as current or first incomplete)
         const currentModuleIndex = courseData.modules.findIndex(
@@ -203,7 +208,6 @@ const CourseDetailPage = () => {
       }
     } catch (err) {
       console.error("Error fetching course progress:", err);
-      // Don't throw error here, just log it as progress fetch is not critical for initial load
     }
   };
 
@@ -237,7 +241,7 @@ const CourseDetailPage = () => {
         const response = await axios.post(
           `${url}courses/${courseId}/progress`,
           {
-            moduleId: currentModuleId, // This is all your API needs
+            moduleId: currentModuleId,
           },
           {
             headers: {
@@ -251,17 +255,11 @@ const CourseDetailPage = () => {
         if (response.data.success) {
           setProgress(response.data.progress);
           console.log(`Course progress updated: ${response.data.progress}%`);
-          console.log(
-            `Completed modules: ${response.data.completedModules.length}`
-          );
 
           // Update courseData with the latest completion status
           const updatedCourseData = { ...courseData };
           updatedCourseData.modules[currentModule].completed = true;
           setCourseData(updatedCourseData);
-
-          // Optionally show success feedback to user
-          // You could add a toast notification here
         }
       }
     } catch (err) {
@@ -284,11 +282,9 @@ const CourseDetailPage = () => {
         switch (status) {
           case 400:
             console.error(`Bad request: ${message}`);
-            // Could be invalid module ID
             break;
           case 401:
             console.error("Authentication failed while updating progress");
-            // Redirect to login or refresh token
             break;
           case 403:
             console.error(
@@ -306,9 +302,6 @@ const CourseDetailPage = () => {
       } else {
         console.error("Unexpected error:", err.message);
       }
-
-      // Optionally show error notification to user
-      // You could add a toast notification here
     }
   };
 
@@ -337,12 +330,10 @@ const CourseDetailPage = () => {
             },
           }
         );
-        // Optionally show success message
         console.log("Notes saved successfully");
       }
     } catch (err) {
       console.error("Error saving notes:", err);
-      // Optionally show error message
     }
   };
 
@@ -357,18 +348,6 @@ const CourseDetailPage = () => {
         }`}
       />
     ));
-  };
-
-  const getDaysAgo = (dateString) => {
-    const date = new Date(dateString);
-    const today = new Date();
-    const diffTime = Math.abs(today - date);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 1) return "Yesterday";
-    if (diffDays < 7) return `${diffDays} days ago`;
-    if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`;
-    return `${Math.ceil(diffDays / 30)} months ago`;
   };
 
   if (loading) {
@@ -442,17 +421,17 @@ const CourseDetailPage = () => {
                 <Menu className="h-6 w-6" />
               )}
             </button>
-            <button className="flex items-center text-gray-400 hover:text-white">
+            <button className="flex items-center text-gray-400 hover:text-white text-sm md:text-base">
               <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to My Courses
+              <span className="hidden sm:inline">Back to My Courses</span>
             </button>
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-gray-400 hidden sm:block">
               Progress: {Math.round(progress)}%
             </div>
-            <div className="w-32 bg-gray-700 rounded-full h-2">
+            <div className="w-20 sm:w-32 bg-gray-700 rounded-full h-2">
               <div
                 className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
@@ -466,13 +445,31 @@ const CourseDetailPage = () => {
         {/* Sidebar */}
         <div
           className={`${
-            sidebarOpen ? "w-80" : "w-0"
-          } lg:w-80 bg-gray-800 border-r border-gray-700 transition-all duration-300 overflow-hidden`}
+            sidebarOpen
+              ? "fixed inset-0 z-50 bg-gray-900 bg-opacity-75 lg:bg-opacity-0 lg:relative"
+              : "hidden"
+          } lg:block lg:w-80 bg-gray-800 border-r border-gray-700 overflow-hidden`}
         >
-          <div className="p-4">
-            <h2 className="text-lg font-semibold truncate mb-2">
+          <div
+            className={`p-4 h-full overflow-y-auto ${
+              sidebarOpen
+                ? "lg:static absolute inset-0 z-50 bg-gray-800 w-80"
+                : ""
+            }`}
+          >
+            <div className="flex justify-between items-center mb-4 lg:hidden">
+              <h2 className="text-lg font-semibold truncate">
+                {courseData.title}
+              </h2>
+              <button onClick={() => setSidebarOpen(false)}>
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+
+            <h2 className="text-lg font-semibold truncate mb-2 hidden lg:block">
               {courseData.title}
             </h2>
+
             <div className="flex items-center text-sm text-gray-400 mb-4">
               <User className="h-4 w-4 mr-1" />
               <span>
@@ -493,7 +490,10 @@ const CourseDetailPage = () => {
                       ? "bg-blue-600 text-white"
                       : "bg-gray-700 hover:bg-gray-600"
                   }`}
-                  onClick={() => setCurrentModule(index)}
+                  onClick={() => {
+                    setCurrentModule(index);
+                    if (isMobile) setSidebarOpen(false);
+                  }}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
@@ -556,18 +556,22 @@ const CourseDetailPage = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0">
+          {" "}
+          {/* Added min-w-0 to prevent overflow */}
           {/* Video Player Area */}
           <div className="bg-black aspect-video flex items-center justify-center relative">
             {/* You can replace this with an actual video player */}
-            <div className="text-center">
+            <div className="text-center px-4">
               <div className="bg-gray-800 rounded-full p-4 mb-4 inline-block">
-                <Play className="h-12 w-12 text-white" />
+                <Play className="h-8 w-8 md:h-12 md:w-12 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">
+              <h3 className="text-lg md:text-xl font-semibold mb-2">
                 {currentModuleData.title}
               </h3>
-              <p className="text-gray-400">{currentModuleData.duration}</p>
+              <p className="text-gray-400 text-sm md:text-base">
+                {currentModuleData.duration}
+              </p>
 
               {/* Module Progress Display */}
               <div className="mt-4">
@@ -577,7 +581,7 @@ const CourseDetailPage = () => {
                     ? "Completed"
                     : "In Progress"}
                 </div>
-                <div className="w-64 mx-auto bg-gray-700 rounded-full h-2">
+                <div className="w-48 md:w-64 mx-auto bg-gray-700 rounded-full h-2">
                   <div
                     className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${moduleProgress[currentModule] || 0}%` }}
@@ -589,15 +593,15 @@ const CourseDetailPage = () => {
             {/* Video Controls */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 md:space-x-4">
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
                     className="bg-blue-600 hover:bg-blue-700 rounded-full p-2"
                   >
                     {isPlaying ? (
-                      <Pause className="h-6 w-6" />
+                      <Pause className="h-5 w-5 md:h-6 md:w-6" />
                     ) : (
-                      <Play className="h-6 w-6" />
+                      <Play className="h-5 w-5 md:h-6 md:w-6" />
                     )}
                   </button>
                   <button
@@ -605,7 +609,7 @@ const CourseDetailPage = () => {
                     disabled={currentModule === 0}
                   >
                     <SkipBack
-                      className={`h-5 w-5 ${
+                      className={`h-4 w-4 md:h-5 md:w-5 ${
                         currentModule === 0
                           ? "text-gray-600"
                           : "text-white hover:text-blue-400"
@@ -617,7 +621,7 @@ const CourseDetailPage = () => {
                     disabled={currentModule === courseData.modules.length - 1}
                   >
                     <SkipForward
-                      className={`h-5 w-5 ${
+                      className={`h-4 w-4 md:h-5 md:w-5 ${
                         currentModule === courseData.modules.length - 1
                           ? "text-gray-600"
                           : "text-white hover:text-blue-400"
@@ -626,64 +630,90 @@ const CourseDetailPage = () => {
                   </button>
                 </div>
 
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 md:space-x-4">
                   <button onClick={() => setIsMuted(!isMuted)}>
                     {isMuted ? (
-                      <VolumeX className="h-5 w-5" />
+                      <VolumeX className="h-4 w-4 md:h-5 md:w-5" />
                     ) : (
-                      <Volume2 className="h-5 w-5" />
+                      <Volume2 className="h-4 w-4 md:h-5 md:w-5" />
                     )}
                   </button>
                   <button>
-                    <Settings className="h-5 w-5" />
+                    <Settings className="h-4 w-4 md:h-5 md:w-5" />
                   </button>
                   <button>
-                    <Maximize className="h-5 w-5" />
+                    <Maximize className="h-4 w-4 md:h-5 md:w-5" />
                   </button>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Content Tabs */}
-          <div className="border-b border-gray-700 bg-gray-800">
-            <div className="flex space-x-8 px-6">
-              <button className="py-4 border-b-2 border-blue-500 text-blue-400 font-medium">
+          {/* Content Tabs - Responsive */}
+          <div className="border-b border-gray-700 bg-gray-800 overflow-x-auto">
+            <div className="flex space-x-4 md:space-x-8 px-4 md:px-6 min-w-max">
+              <button
+                className={`py-4 px-2 text-sm md:text-base ${
+                  activeTab === "overview"
+                    ? "border-b-2 border-blue-500 text-blue-400 font-medium"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                onClick={() => setActiveTab("overview")}
+              >
                 Overview
               </button>
               <button
-                className="py-4 text-gray-400 hover:text-white"
-                onClick={() => setShowNotes(!showNotes)}
+                className={`py-4 px-2 text-sm md:text-base ${
+                  activeTab === "notes"
+                    ? "border-b-2 border-blue-500 text-blue-400 font-medium"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                onClick={() => {
+                  setActiveTab("notes");
+                  setShowNotes(!showNotes);
+                }}
               >
                 Notes
               </button>
               <button
-                className="py-4 text-gray-400 hover:text-white"
-                onClick={() => setShowTranscript(!showTranscript)}
+                className={`py-4 px-2 text-sm md:text-base ${
+                  activeTab === "transcript"
+                    ? "border-b-2 border-blue-500 text-blue-400 font-medium"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                onClick={() => {
+                  setActiveTab("transcript");
+                  setShowTranscript(!showTranscript);
+                }}
               >
                 Transcript
               </button>
               <button
-                className="py-4 text-gray-400 hover:text-white"
-                onClick={() => setDiscussionOpen(!discussionOpen)}
+                className={`py-4 px-2 text-sm md:text-base ${
+                  activeTab === "discussion"
+                    ? "border-b-2 border-blue-500 text-blue-400 font-medium"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                onClick={() => {
+                  setActiveTab("discussion");
+                  setDiscussionOpen(!discussionOpen);
+                }}
               >
                 Discussion
               </button>
             </div>
           </div>
-
           {/* Content Area */}
           <div className="flex-1 overflow-y-auto">
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               {/* Module Content */}
-              <div className="max-w-4xl">
-                <div className="flex items-center justify-between mb-6">
-                  <h1 className="text-2xl font-bold">
+              <div className="max-w-4xl mx-auto">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
+                  <h1 className="text-xl md:text-2xl font-bold">
                     {currentModuleData.title}
                   </h1>
                   <button
                     onClick={handleModuleComplete}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 w-full sm:w-auto"
                     disabled={moduleProgress[currentModule] === 100}
                   >
                     <CheckCircle className="h-4 w-4" />
@@ -696,7 +726,7 @@ const CourseDetailPage = () => {
                 </div>
 
                 <div className="prose prose-invert max-w-none mb-8">
-                  <p className="text-gray-300 leading-relaxed text-lg">
+                  <p className="text-gray-300 leading-relaxed text-base md:text-lg">
                     {currentModuleData.text || currentModuleData.description}
                   </p>
                 </div>
@@ -715,11 +745,13 @@ const CourseDetailPage = () => {
                             key={index}
                             className="bg-gray-800 rounded-lg p-4 flex items-center justify-between"
                           >
-                            <div className="flex items-center space-x-3">
-                              <FileText className="h-5 w-5 text-blue-400" />
-                              <span>{resource.name || resource}</span>
+                            <div className="flex items-center space-x-3 truncate">
+                              <FileText className="h-5 w-5 text-blue-400 flex-shrink-0" />
+                              <span className="truncate">
+                                {resource.name || resource}
+                              </span>
                             </div>
-                            <button className="text-blue-400 hover:text-blue-300">
+                            <button className="text-blue-400 hover:text-blue-300 flex-shrink-0 ml-2">
                               <Download className="h-4 w-4" />
                             </button>
                           </div>
@@ -735,7 +767,7 @@ const CourseDetailPage = () => {
                       <h3 className="text-lg font-semibold mb-4">
                         Knowledge Check
                       </h3>
-                      <div className="bg-gray-800 rounded-lg p-6">
+                      <div className="bg-gray-800 rounded-lg p-4 md:p-6">
                         {currentModuleData.quiz.map((question, qIndex) => (
                           <div key={qIndex} className="mb-6">
                             <h4 className="font-medium mb-4">
@@ -758,7 +790,7 @@ const CourseDetailPage = () => {
                             </div>
                           </div>
                         ))}
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg w-full md:w-auto">
                           Submit Quiz
                         </button>
                       </div>
@@ -766,11 +798,11 @@ const CourseDetailPage = () => {
                   )}
 
                 {/* Navigation */}
-                <div className="flex justify-between items-center pt-8 border-t border-gray-700">
+                <div className="flex flex-col-reverse sm:flex-row justify-between items-center pt-8 border-t border-gray-700 gap-4">
                   <button
                     onClick={handlePrevModule}
                     disabled={currentModule === 0}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg w-full sm:w-auto justify-center ${
                       currentModule === 0
                         ? "text-gray-500 cursor-not-allowed"
                         : "text-white bg-gray-700 hover:bg-gray-600"
@@ -789,7 +821,7 @@ const CourseDetailPage = () => {
                   <button
                     onClick={handleNextModule}
                     disabled={currentModule === courseData.modules.length - 1}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg w-full sm:w-auto justify-center ${
                       currentModule === courseData.modules.length - 1
                         ? "text-gray-500 cursor-not-allowed"
                         : "text-white bg-blue-600 hover:bg-blue-700"
@@ -805,9 +837,9 @@ const CourseDetailPage = () => {
         </div>
       </div>
 
-      {/* Notes Panel */}
+      {/* Notes Panel - Responsive */}
       {showNotes && (
-        <div className="fixed right-0 top-0 h-full w-80 bg-gray-800 border-l border-gray-700 z-50">
+        <div className="fixed right-0 top-0 h-full w-full sm:w-80 bg-gray-800 border-l border-gray-700 z-50">
           <div className="p-4 border-b border-gray-700 flex items-center justify-between">
             <h3 className="font-semibold">My Notes</h3>
             <button onClick={() => setShowNotes(false)}>
@@ -831,9 +863,9 @@ const CourseDetailPage = () => {
         </div>
       )}
 
-      {/* Transcript Panel */}
+      {/* Transcript Panel - Responsive */}
       {showTranscript && (
-        <div className="fixed right-0 top-0 h-full w-80 bg-gray-800 border-l border-gray-700 z-50">
+        <div className="fixed right-0 top-0 h-full w-full sm:w-80 bg-gray-800 border-l border-gray-700 z-50">
           <div className="p-4 border-b border-gray-700 flex items-center justify-between">
             <h3 className="font-semibold">Transcript</h3>
             <button onClick={() => setShowTranscript(false)}>

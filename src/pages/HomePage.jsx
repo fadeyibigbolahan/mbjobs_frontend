@@ -24,8 +24,6 @@ function HomePage() {
       <WhyChooseUs />
       <TopCategories />
       <CoreFeatures />
-      {/* <ForWho /> */}
-      {/* <HowItWorks /> */}
       <CallToAction />
       <Footer />
     </div>

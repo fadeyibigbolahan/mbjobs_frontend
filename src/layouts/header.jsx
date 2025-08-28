@@ -189,7 +189,7 @@ export const Header = ({ collapsed, setCollapsed }) => {
 
   return (
     <>
-      <header className="relative w-full z-10 flex h-[60px] items-center justify-between bg-[#FAFAF8] px-4 border-b dark:bg-slate-900">
+      <header className="fixed top-0 left-0 right-0 w-full z-10 flex h-[60px] items-center justify-between bg-[#FAFAF8] px-4 border-b dark:bg-slate-900">
         <div className="flex items-center gap-x-3">
           <button
             className="btn-ghost size-10"
@@ -249,8 +249,12 @@ export const Header = ({ collapsed, setCollapsed }) => {
 
       {/* Chat Modal */}
       {chatModal && (
-        <div className="absolute right-3 top-[70px] w-full max-w-md z-10">
-          <div className="flex flex-col rounded-md bg-white shadow-lg h-[500px] w-full md:w-[400px]">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 md:pt-20 md:items-start md:justify-end md:pr-4">
+          <div
+            className="bg-black bg-opacity-50 absolute inset-0"
+            onClick={() => setChatModal(false)}
+          ></div>
+          <div className="relative flex flex-col rounded-md bg-white shadow-lg h-[80vh] w-full max-w-md mx-4 md:mx-0">
             {/* Chat Header */}
             <div className="flex items-center justify-between bg-[#014581] text-white p-4 rounded-t-md">
               <div className="flex items-center gap-2">
@@ -399,8 +403,12 @@ export const Header = ({ collapsed, setCollapsed }) => {
 
       {/* Notifications Modal */}
       {modal && (
-        <div className="absolute md:right-10 right-3 top-[70px] w-full max-w-xs md:max-w-sm z-10">
-          <div className="flex flex-col rounded-md bg-white p-4 shadow-md h-[300px] w-full md:w-[400px]">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 md:pt-20 md:items-start md:justify-end md:pr-4">
+          <div
+            className="bg-black bg-opacity-50 absolute inset-0"
+            onClick={() => setModal(false)}
+          ></div>
+          <div className="relative flex flex-col rounded-md bg-white p-4 shadow-md h-[300px] w-full max-w-md mx-4 md:mx-0">
             {/* Header */}
             <div className="flex items-center justify-between border-b-2 border-gray-200 pb-2">
               <h2 className="text-md font-semibold">NOTIFICATIONS</h2>
@@ -438,8 +446,12 @@ export const Header = ({ collapsed, setCollapsed }) => {
 
       {/* Profile Modal */}
       {profileModal && (
-        <div className="absolute right-3 top-[60px] max-w-xs md:max-w-sm z-10">
-          <div className="flex flex-col items-center rounded-md bg-white p-4 shadow-md w-[250px]">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 md:pt-20 md:items-start md:justify-end md:pr-4">
+          <div
+            className="bg-black bg-opacity-50 absolute inset-0"
+            onClick={() => setProfileModal(false)}
+          ></div>
+          <div className="relative flex flex-col items-center rounded-md bg-white p-4 shadow-md w-full max-w-xs mx-4 md:mx-0">
             <div className="size-10 overflow-hidden rounded-full">
               <img
                 src={profileImg}

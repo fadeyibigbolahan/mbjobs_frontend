@@ -104,48 +104,50 @@ export default function ContactPage() {
         <Navbar />
       </div>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4 sm:px-0">
               Get in{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Touch
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0 leading-relaxed">
               Whether you're a job seeker looking for your dream role or an
               employer seeking top talent, we're here to help you succeed.
             </p>
 
             {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-8 mb-12">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 px-2 sm:px-0">
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex items-center space-x-3 bg-white rounded-xl px-6 py-4 shadow-sm"
+                  className="flex items-center space-x-2 sm:space-x-3 bg-white rounded-lg sm:rounded-xl px-3 sm:px-4 lg:px-6 py-3 sm:py-4 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <stat.icon className="w-8 h-8 text-blue-600" />
+                  <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 flex-shrink-0" />
                   <div className="text-left">
-                    <div className="text-2xl font-bold text-gray-900">
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
                       {stat.number}
                     </div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-xs sm:text-sm text-gray-600 whitespace-nowrap">
+                      {stat.label}
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-12 sm:mb-16">
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
                 Send us a Message
               </h2>
 
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+              <form className="space-y-4 sm:space-y-6">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Full Name
@@ -155,7 +157,7 @@ export default function ContactPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base"
                       placeholder="John Doe"
                       required
                     />
@@ -169,7 +171,7 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base"
                       placeholder="john@example.com"
                       required
                     />
@@ -184,7 +186,7 @@ export default function ContactPage() {
                     name="userType"
                     value={formData.userType}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base"
                   >
                     <option value="jobseeker">Job Seeker</option>
                     <option value="employer">Employer</option>
@@ -202,7 +204,7 @@ export default function ContactPage() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm sm:text-base"
                     placeholder="How can we help you?"
                     required
                   />
@@ -216,8 +218,8 @@ export default function ContactPage() {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    rows={4}
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none text-sm sm:text-base"
                     placeholder="Tell us more about your inquiry..."
                     required
                   />
@@ -225,16 +227,16 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 sm:py-3.5 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 flex items-center justify-center space-x-2 text-sm sm:text-base"
                 >
                   {isSubmitted ? (
                     <>
-                      <CheckCircle className="w-5 h-5" />
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                       <span>Message Sent!</span>
                     </>
                   ) : (
                     <>
-                      <Send className="w-5 h-5" />
+                      <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                       <span>Send Message</span>
                     </>
                   )}
@@ -243,30 +245,30 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Methods */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Other Ways to Reach Us
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {contactMethods.map((method, index) => (
                     <a
                       key={index}
                       href={method.action}
-                      className="block bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all transform hover:scale-105 group"
+                      className="block bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all transform hover:scale-105 group"
                     >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <method.icon className="w-6 h-6 text-white" />
+                      <div className="flex items-center space-x-3 sm:space-x-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                          <method.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
-                        <div>
-                          <h3 className="font-semibold text-gray-900">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
                             {method.title}
                           </h3>
-                          <p className="text-gray-600 text-sm">
+                          <p className="text-gray-600 text-xs sm:text-sm line-clamp-2">
                             {method.description}
                           </p>
-                          <p className="text-blue-600 font-medium">
+                          <p className="text-blue-600 font-medium text-xs sm:text-sm break-all">
                             {method.contact}
                           </p>
                         </div>
@@ -277,14 +279,14 @@ export default function ContactPage() {
               </div>
 
               {/* Business Hours */}
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="flex items-center space-x-3 mb-4">
-                  <Clock className="w-6 h-6 text-blue-600" />
-                  <h3 className="font-semibold text-gray-900">
+              <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-sm">
+                <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
+                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
                     Business Hours
                   </h3>
                 </div>
-                <div className="space-y-2 text-sm">
+                <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Monday - Friday</span>
                     <span className="text-gray-900">9:00 AM - 6:00 PM</span>
@@ -297,7 +299,7 @@ export default function ContactPage() {
                     <span className="text-gray-600">Sunday</span>
                     <span className="text-gray-900">Closed</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-3">
+                  <p className="text-xs text-gray-500 mt-2 sm:mt-3 leading-relaxed">
                     *Emergency support available 24/7 via live chat
                   </p>
                 </div>
@@ -306,28 +308,34 @@ export default function ContactPage() {
           </div>
 
           {/* Office Locations */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+          <div className="mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6 sm:mb-8 px-4 sm:px-0">
               Our Offices
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {officeLocations.map((office, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all"
+                  className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all"
                 >
                   <img
                     src={office.image}
                     alt={`${office.city} office`}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-40 sm:h-48 object-cover"
                   />
-                  <div className="p-6">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <MapPin className="w-5 h-5 text-blue-600" />
-                      <h3 className="font-bold text-gray-900">{office.city}</h3>
+                  <div className="p-4 sm:p-6">
+                    <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0" />
+                      <h3 className="font-bold text-gray-900 text-sm sm:text-base">
+                        {office.city}
+                      </h3>
                     </div>
-                    <p className="text-gray-600 text-sm">{office.address}</p>
-                    <p className="text-gray-600 text-sm">{office.zip}</p>
+                    <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                      {office.address}
+                    </p>
+                    <p className="text-gray-600 text-xs sm:text-sm">
+                      {office.zip}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -335,44 +343,52 @@ export default function ContactPage() {
           </div>
 
           {/* FAQ Section */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 text-center mb-6 sm:mb-8 px-4 sm:px-0">
               Frequently Asked Questions
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  How quickly do you respond to inquiries?
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  We typically respond to all inquiries within 24 hours during
-                  business days.
-                </p>
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+              <div className="space-y-4 sm:space-y-6">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+                    How quickly do you respond to inquiries?
+                  </h3>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                    We typically respond to all inquiries within 24 hours during
+                    business days.
+                  </p>
+                </div>
 
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  Do you offer phone support?
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Yes, phone support is available during business hours for
-                  urgent matters.
-                </p>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+                    Do you offer phone support?
+                  </h3>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                    Yes, phone support is available during business hours for
+                    urgent matters.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  Can I schedule a demo?
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Absolutely! Contact us to schedule a personalized demo of our
-                  platform.
-                </p>
+              <div className="space-y-4 sm:space-y-6">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+                    Can I schedule a demo?
+                  </h3>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                    Absolutely! Contact us to schedule a personalized demo of
+                    our platform.
+                  </p>
+                </div>
 
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  Is there a mobile app?
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Yes, our mobile app is available on both iOS and Android
-                  platforms.
-                </p>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+                    Is there a mobile app?
+                  </h3>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                    Yes, our mobile app is available on both iOS and Android
+                    platforms.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
