@@ -126,7 +126,7 @@ export const employerNavbarLinks = [
       {
         label: "Company Settings",
         icon: Building2,
-        path: "/dashboard/company-settings",
+        path: "/dashboard/profile-settings",
       },
     ],
   },
