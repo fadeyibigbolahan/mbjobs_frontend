@@ -76,16 +76,16 @@ const Navbar = () => {
             <Link to="/">
               <li className="py-2">Features</li>
             </Link>
-            <Link to="">
+            <Link to="/about">
               <li className="py-2">Company</li>
             </Link>
-            <Link to="">
+            <Link to="/pricing">
               <li className="py-2">Pricing</li>
             </Link>
-            <Link to="">
+            <Link to="/faqs">
               <li className="py-2">FAQs</li>
             </Link>
-            <Link to="">
+            <Link to="/contact">
               <li className="py-2">Contact Us</li>
             </Link>
           </ul>
@@ -103,9 +103,6 @@ const Navbar = () => {
           <div className="flex flex-col mt-8">
             <p className="py-3">Contact Us</p>
             <div className="flex flex-col gap-3">
-              <p className="flex flex-row justify-start items-center gap-2 text-sm">
-                <Mail size={18} /> info@fagis.io
-              </p>
               <p className="flex flex-row justify-start items-center gap-2 text-sm">
                 <Smartphone size={18} /> +1 (234) 567-890
               </p>
