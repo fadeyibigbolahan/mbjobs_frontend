@@ -102,7 +102,7 @@ const SignupPage = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col md:h-screen justify-center items-center gap-y-4 md:flex-row">
+      <div className="w-full flex flex-col md:h-screen text-black justify-center items-center gap-y-4 md:flex-row">
         {accountType === "apprentice" ? (
           <div className="h-full w-full bg-[#FFFFFF] md:w-[40%]">
             <div className="flex min-h-screen items-center justify-center">
@@ -114,7 +114,7 @@ const SignupPage = () => {
                     style={{ width: "50px" }}
                   />
                 </Link>
-                <h2 className="font-kanit mb-4 text-center text-lg font-semibold">
+                <h2 className="font-kanit mb-4 text-center text-lg font-semibold ">
                   CREATE AN ACCOUNT AS AN APPRENTICE
                 </h2>
 
@@ -233,11 +233,13 @@ const SignupPage = () => {
           <div className="h-full w-full bg-[#FFFFFF] md:w-[40%]">
             <div className="flex min-h-screen items-center justify-center">
               <div className="flex w-full flex-col items-center justify-center rounded-xl bg-white p-8 gap-4">
-                <img
-                  src={virtual}
-                  alt="virtual Logo"
-                  style={{ width: "50px" }}
-                />
+                <Link to="/">
+                  <img
+                    src={virtual}
+                    alt="virtual Logo"
+                    style={{ width: "50px" }}
+                  />
+                </Link>
                 <h2 className="font-kanit mb-4 text-center text-lg font-semibold">
                   CREATE AN ACCOUNT AS AN EMPLOYER
                 </h2>
@@ -355,6 +357,9 @@ const SignupPage = () => {
           </div>
         ) : (
           <div className="flex flex-col justify-center items-center w-full bg-[#FFFFFF] md:w-[40%] gap-8 p-4">
+            <Link to="/">
+              <img src={virtual} alt="virtual Logo" style={{ width: "60px" }} />
+            </Link>
             <h2 className="font-kanit mb-4 text-center text-3xl font-semibold">
               Join as an Apprentice or Employer
             </h2>
